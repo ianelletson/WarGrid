@@ -15,7 +15,7 @@ public abstract class Grid {
     public abstract void removeActor(Actor actor);
     public abstract void removeActors(Collection<Actor> actors);
     public abstract void removeAllActors();
-    public abstract void setTiles(Collection<Tile> tiles);
+    public abstract void setTiles(Tile[][] tiles);
     public abstract void changeTile(Location location, Tile tile);
 //    public abstract void draw(); // TODO might not need this
 }

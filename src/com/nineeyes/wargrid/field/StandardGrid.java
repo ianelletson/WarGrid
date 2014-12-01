@@ -12,7 +12,9 @@ import java.util.Map;
 public class StandardGrid extends Grid {
     private Tile[][] tiles;
     private Map<Actor, Location> actors;
+    private int xSize, ySize;
     // TODO probably need a way of displaying something around tiles, might not
+
 
 
     @Override
@@ -22,31 +24,34 @@ public class StandardGrid extends Grid {
 
     @Override
     public void addActors(Map<Actor, Location> actors) {
-
+        this.actors.putAll(actors);
     }
 
     @Override
     public void removeActor(Actor actor) {
-
+        actors.remove(actor);
     }
 
     @Override
     public void removeActors(Collection<Actor> actors) {
-
+        for (Actor actor : actors)
+            this.actors.remove(actor);
     }
 
     @Override
     public void removeAllActors() {
-
+        actors.clear();
     }
 
     @Override
-    public void setTiles(Collection<Tile> tiles) {
-
+    public void setTiles(Tile[][] tiles) {
+        if ((tiles.length != xSize) || tiles.length != ySize)
+            throw new IllegalArgumentException("supplied tiles array does not have correct size");
+        this.tiles = tiles;
     }
 
     @Override
     public void changeTile(Location location, Tile tile) {
-
+        tiles[location.x][location.y] = tile;
     }
 }

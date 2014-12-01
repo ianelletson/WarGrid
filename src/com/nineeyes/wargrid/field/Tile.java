@@ -10,18 +10,73 @@ import java.awt.image.BufferedImage;
  * Abstract class all tiles will derive from
  */
 public abstract class Tile {
-    public abstract boolean getOccupied();
-    public abstract Actor getOccupant();
-    public abstract boolean getEdge();
-    public abstract SColor getColor();
-    public abstract BufferedImage getGlyph();
-    public abstract void setOccupied(boolean occupied);
-    public abstract void addOccupant(Actor actor);
-    public abstract void removeOccupant();
-    public abstract void setEdge(boolean edge);
-    public abstract void setColor(SColor color);
-    public abstract void setGlyph(BufferedImage glyph);
-    public abstract void setFieldEffectCommand(FieldEffectCommand fec);
-    public abstract void setFieldMovementCommand(FieldMovementCommand fmc);
-    public abstract void onOccupy();
+    private boolean occupied;
+    private Actor occupant;
+    private boolean edge;
+    private SColor color;
+    private FieldEffectCommand fieldEffectCommand;
+    private FieldMovementCommand fieldMovementCommand;
+    private BufferedImage glyph;
+
+    public boolean getOccupied() {
+        return occupied;
+    }
+
+    public Actor getOccupant() {
+        return occupant;
+    }
+
+    public boolean getEdge() {
+        return edge;
+    }
+
+    public SColor getColor() {
+        return color;
+    }
+
+    public BufferedImage getGlyph() {
+        return glyph;
+    }
+
+    public void setOccupied(boolean occupied) {
+//        if ((occupant) && (!occupied))
+        // TODO implement exception
+        this.occupied = occupied;
+    }
+
+    public void addOccupant(Actor actor) {
+//        if ((actor == null) || (occupant != null))
+        // TODO throw exception
+        occupant = actor;
+    }
+
+    public void removeOccupant() {
+        occupant = null;
+    }
+
+    public void setEdge(boolean edge) {
+        this.edge = edge;
+    }
+
+    public void setColor(SColor color) {
+        this.color = color;
+    }
+
+    public void setGlyph(BufferedImage glyph) {
+        this.glyph = glyph;
+    }
+
+    public void setFieldEffectCommand(FieldEffectCommand fec) {
+        fieldEffectCommand = fec;
+    }
+
+
+    public void setFieldMovementCommand(FieldMovementCommand fmc) {
+        fieldMovementCommand = fmc;
+    }
+
+    public void onOccupy() {
+        fieldEffectCommand.execute();
+        fieldMovementCommand.execute();
+    }
 }
