@@ -8,40 +8,43 @@ import squidpony.squidcolor.SColor;
  * Creates standard tiles
  */
 public class StandardTileFactory implements TileFactory {
+    private SColor playerColor = SColor.BLUE;
+    private SColor enemyColor = SColor.RED;
+
+    public StandardTileFactory() {
+    }
 
     @Override
     public Tile makeEdgeTile(Entity entity) {
-        boolean edge = true;
         SColor color;
 
         switch (entity) {
             case PLAYER:
-                color = SColor.BLUE;
+                color = playerColor;
                 break;
             case ENEMY:
-                color = SColor.RED;
+                color = enemyColor;
                 break;
             default:
                 throw new EnumConstantNotPresentException(Entity.class, entity.toString() + " is not a valid enum");
         }
-        return new StandardTile(edge, color);
+        return new StandardTile(true, color);
     }
 
     @Override
     public Tile makeInteriorTile(Entity entity) {
-        boolean edge = false;
         SColor color;
 
         switch (entity) {
             case PLAYER:
-                color = SColor.BLUE;
+                color = playerColor;
                 break;
             case ENEMY:
-                color = SColor.RED;
+                color = enemyColor;
                 break;
             default:
                 throw new EnumConstantNotPresentException(Entity.class, entity.toString() + " is not a valid enum");
         }
-        return new StandardTile(edge, color);
+        return new StandardTile(false, color);
     }
 }
