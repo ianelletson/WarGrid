@@ -80,6 +80,11 @@ public abstract class Grid {
         this.tiles = tiles;
     }
 
+    /**
+     * Changes the current Tile at a Location to the given Tile
+     * @param location the Location of the interested Tile
+     * @param tile the Tile to replace the current Tile
+     */
     public void changeTile(Location location, Tile tile) {
         tiles[location.x][location.y] = tile;
     }

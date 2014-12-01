@@ -39,19 +39,19 @@ public abstract class Tile {
     }
 
     public void setOccupied(boolean occupied) {
-//        if ((occupant) && (!occupied))
-        // TODO implement exception
         this.occupied = occupied;
     }
 
     public void addOccupant(Actor actor) {
-//        if ((actor == null) || (occupant != null))
-        // TODO throw exception
+        if (actor == null)
+            throw new IllegalArgumentException("Can't add a null occupant");
         occupant = actor;
+        setOccupied(true);
     }
 
     public void removeOccupant() {
         occupant = null;
+        setOccupied(false);
     }
 
     public void setEdge(boolean edge) {
@@ -70,11 +70,14 @@ public abstract class Tile {
         fieldEffectCommand = fec;
     }
 
-
     public void setFieldMovementCommand(FieldMovementCommand fmc) {
         fieldMovementCommand = fmc;
     }
 
+    /**
+     * Executes the FieldEffectCommand and the FieldMovementCommand in that order.
+     * Example: if the tile is icy poison, deal poison damage to occupant and then push occupant along path.
+     */
     public void onOccupy() {
         fieldEffectCommand.execute();
         fieldMovementCommand.execute();
