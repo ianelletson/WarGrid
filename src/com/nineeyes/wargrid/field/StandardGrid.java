@@ -6,7 +6,10 @@ package com.nineeyes.wargrid.field;
  */
 public class StandardGrid extends Grid {
     public StandardGrid() {
-        xSize = 3; // Standard x and y sizes based of MMBN
-        ySize = 6;
+        xSize = 6; // Standard x and y sizes based of MMBN
+        ySize = 3;
+        setPlayerXSize(xSize/2);
+        setPlayerYSize(ySize);
+        setTiles(new Tile[xSize][ySize]);
     }
 }
