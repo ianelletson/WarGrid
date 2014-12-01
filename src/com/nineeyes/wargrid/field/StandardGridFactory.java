@@ -26,7 +26,8 @@ public class StandardGridFactory implements GridFactory {
         for (int i = 0; i < grid.getxSize(); ++i)
             for (int j = 0; j < grid.getySize(); ++j) {
                 Tile tile;
-                if ((i == 0) || (i == x-1) || (j == 0) || (j == y-1))
+                // TODO refactor with player/enemy distinction at top, then better size disctinction
+                if ((i == 0) || (i == x-1) || (i == x/2) || (i == (x/2) + 1) || (j == 0) || (j == y-1))
                     if ((i < grid.getxPlayerSize()) || (j < grid.getyPlayerSize()))
                         tile = tileFactory.makeEdgeTile(Entity.PLAYER);
                     else
