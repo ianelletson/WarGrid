@@ -10,10 +10,10 @@ import java.util.Map;
  * Abstract class for Grids
  */
 public abstract class Grid {
+    protected int xSize, ySize;
     private Tile[][] tiles;
     private Map<Actor, Location> allies;
     private Map<Actor, Location> enemies;
-    protected int xSize, ySize;
     private int xPlayerSize, yPlayerSize;
     // TODO probably need a way of displaying something around tiles, might not
     // TODO might need a way of displaying in general, could call display on all tiles
@@ -82,8 +82,9 @@ public abstract class Grid {
 
     /**
      * Changes the current Tile at a Location to the given Tile
+     *
      * @param location the Location of the interested Tile
-     * @param tile the Tile to replace the current Tile
+     * @param tile     the Tile to replace the current Tile
      */
     public void changeTile(Location location, Tile tile) {
         tiles[location.x][location.y] = tile;

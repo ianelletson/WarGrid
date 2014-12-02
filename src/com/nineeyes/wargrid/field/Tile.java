@@ -22,6 +22,10 @@ public abstract class Tile {
         return occupied;
     }
 
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
+    }
+
     public Actor getOccupant() {
         return occupant;
     }
@@ -30,16 +34,24 @@ public abstract class Tile {
         return edge;
     }
 
+    public void setEdge(boolean edge) {
+        this.edge = edge;
+    }
+
     public SColor getColor() {
         return color;
+    }
+
+    public void setColor(SColor color) {
+        this.color = color;
     }
 
     public BufferedImage getGlyph() {
         return glyph;
     }
 
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
+    public void setGlyph(BufferedImage glyph) {
+        this.glyph = glyph;
     }
 
     public void addOccupant(Actor actor) {
@@ -52,18 +64,6 @@ public abstract class Tile {
     public void removeOccupant() {
         occupant = null;
         setOccupied(false);
-    }
-
-    public void setEdge(boolean edge) {
-        this.edge = edge;
-    }
-
-    public void setColor(SColor color) {
-        this.color = color;
-    }
-
-    public void setGlyph(BufferedImage glyph) {
-        this.glyph = glyph;
     }
 
     public void setFieldEffectCommand(FieldEffectCommand fec) {

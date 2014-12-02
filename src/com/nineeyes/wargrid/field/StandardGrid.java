@@ -8,7 +8,7 @@ public class StandardGrid extends Grid {
     public StandardGrid() {
         xSize = 6; // Standard x and y sizes based of MMBN
         ySize = 3;
-        setPlayerXSize(xSize/2);
+        setPlayerXSize(xSize / 2);
         setPlayerYSize(ySize);
         setTiles(new Tile[xSize][ySize]);
     }

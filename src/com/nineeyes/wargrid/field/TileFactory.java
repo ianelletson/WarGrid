@@ -8,5 +8,6 @@ import com.nineeyes.wargrid.entities.Entity;
  */
 public interface TileFactory {
     public Tile makeEdgeTile(Entity entity);
+
     public Tile makeInteriorTile(Entity entity);
 }
