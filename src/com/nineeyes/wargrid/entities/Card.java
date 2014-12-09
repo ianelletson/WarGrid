@@ -13,28 +13,28 @@ public abstract class Card {
     private String description; // TODO implement a way of reading card descriptions from a file
     private Command effect;
 
-    protected void setID(int id) {
-        ID = id;
-    }
-
     public int getID() {
         return ID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    protected void setID(int id) {
+        ID = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     abstract void execute();
