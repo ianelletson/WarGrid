@@ -4,10 +4,13 @@ import com.nineeyes.wargrid.command.Command;
 
 /**
  * com.nineeyes.wargrid.entities
+ * Class that all cards will derive from
+ * Every card has an effect
  */
 public abstract class Card {
     private int ID;
     private String name;
+    private String description; // TODO implement a way of reading card descriptions from a file
     private Command effect;
 
     protected void setID(int id) {
@@ -24,6 +27,14 @@ public abstract class Card {
 
     public String getName() {
         return name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     abstract void execute();

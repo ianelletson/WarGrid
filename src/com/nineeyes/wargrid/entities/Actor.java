@@ -2,7 +2,6 @@ package com.nineeyes.wargrid.entities;
 
 import squidpony.squidcolor.SColor;
 
-import javax.smartcardio.Card;
 import java.util.Collection;
 import java.util.List;
 
@@ -73,23 +72,23 @@ public abstract class Actor {
     }
 
     public void addToInventory(Card card) {
-        // TODO add card to inventory
+        inventory.addCard(card);
     }
 
     public void addToInventory(Collection<Card> cards) {
-        // TODO add cards to inventory
+        inventory.addCards(cards);
     }
 
     public void removeFromInventory(Card card) {
-        // TODO remove card from inventory
+        inventory.removeCard(card);
     }
 
     public void removeFromInventory(Collection<Card> cards) {
-        // TODO remove cards from inventory
+        inventory.removeCards(cards);
     }
 
     public void clearInventory() {
-        // TODO clear inventory
+        inventory.clearInventory();
     }
 
     public List<Deck> getDecks() {
