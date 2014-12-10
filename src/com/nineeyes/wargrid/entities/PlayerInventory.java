@@ -10,6 +10,7 @@ public class PlayerInventory extends Inventory {
     public PlayerInventory() {
         this(new HashMap<Card, Integer>());
     }
+
     public PlayerInventory(Map<Card, Integer> cards) {
         setCards(cards);
     }

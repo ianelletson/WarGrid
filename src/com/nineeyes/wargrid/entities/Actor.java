@@ -9,7 +9,7 @@ import java.util.List;
  * Created by ian on 11/30/14.
  * Actor class is abstract super class of all acting entities in the game e.g. player and enemy
  */
-public abstract class Actor implements Levelable{
+public abstract class Actor implements Levelable {
     private int ID;
     private int health, level, experience, expCap;
     private Inventory inventory;
