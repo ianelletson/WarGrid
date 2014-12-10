@@ -3,17 +3,15 @@ package com.nineeyes.wargrid.entities;
 import squidpony.squidcolor.SColor;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by ian on 11/30/14.
  * Actor class is abstract super class of all acting entities in the game e.g. player and enemy
  */
-public abstract class Actor implements Levelable {
+public abstract class Actor {
     private int ID;
-    private int health, level, experience, expCap;
+    private int health, experience;
     private Inventory inventory;
-    private List<Deck> decks;
     private Hand hand;
     private SColor color;
     private String name;
@@ -64,73 +62,18 @@ public abstract class Actor implements Levelable {
             this.health = 0;
     }
 
-    @Override
-    public int getExpCap() {
-        return expCap;
-    }
+    public abstract int getExperience();
 
-    @Override
-    public void setExpCap(int expCap) {
-        if (expCap < 1)
-            throw new IllegalArgumentException("Can't have exp cap less than 1");
-        this.expCap = expCap;
-    }
+    public abstract void setExperience(int experience);
 
-    @Override
-    public void modifyExpCap(int expCap) {
-        setExpCap(experience + expCap);
-        if (experience > this.expCap)
-            levelUp(experience % this.expCap);
-    }
-
-    @Override
-    public int getExperience() {
-        return experience;
-    }
-
-    @Override
-    public void setExperience(int experience) {
-        this.experience = experience;
-        if (this.experience > expCap)
-            levelUp(this.experience % expCap);
-    }
-
-    @Override
-    public void modifyExperience(int experience) {
-        this.experience += experience;
-        if (this.experience < 0)
-            setExperience(0);
-        if (this.experience > expCap)
-            levelUp(this.experience % expCap);
-    }
-
-    @Override
-    public int getLevel() {
-        return level;
-    }
-
-    @Override
-    public void setLevel(int level) {
-        if (level < 1)
-            level = 1;
-        this.level = level;
-    }
-
-    @Override
-    public void modifyLevel(int level) {
-        setLevel(this.level + level);
-    }
-
-    @Override
-    public abstract void levelUp(int levels);
 
     public Inventory getInventory() {
         return inventory;
     }
 
     public void setInventory(Inventory inventory) {
-        if (decks == null)
-            throw new IllegalArgumentException("Inventory cannot be null");
+        if (inventory == null)
+            throw new IllegalArgumentException("Cannot set inventory to be null");
         this.inventory = inventory;
     }
 
@@ -154,32 +97,6 @@ public abstract class Actor implements Levelable {
         inventory.clearInventory();
     }
 
-    public List<Deck> getDecks() {
-        if (decks.isEmpty())
-            throw new IllegalStateException("No decks");
-        return decks;
-    }
-
-    public void setDecks(List<Deck> decks) {
-        if (decks == null)
-            throw new IllegalArgumentException("Cannot set decks to null");
-        this.decks = decks;
-    }
-
-    public Deck getActiveDeck() {
-        return decks.get(0);
-    }
-
-    public void setActiveDeck(Deck deck) {
-        if (deck == null)
-            throw new IllegalArgumentException("Deck cannot be null");
-        decks.add(0, deck);
-    }
-
-    public void clearDecks() {
-        decks.clear();
-    }
-
     public Hand getHand() {
         return hand;
     }
@@ -189,6 +106,8 @@ public abstract class Actor implements Levelable {
             throw new IllegalArgumentException("Hand cannot be null");
         this.hand = hand;
     }
+
+    public abstract Hand drawHand();
 
     @Override
     public boolean equals(Object o) {

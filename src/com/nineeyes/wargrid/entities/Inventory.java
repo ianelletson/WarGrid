@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * com.nineeyes.wargrid.entities
+ * Abstract class for all inventories. Provides methods for modifying and retrieving items from inventory
  */
 public abstract class Inventory {
     private Map<Card, Integer> cards;
