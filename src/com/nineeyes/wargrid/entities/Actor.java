@@ -10,11 +10,20 @@ import java.util.List;
  * Actor class is abstract super class of all acting entities in the game e.g. player and enemy
  */
 public abstract class Actor {
+    private int ID;
     private int health, level;
     private Inventory inventory;
     private List<Deck> decks;
     private Hand hand;
     private SColor color;
+
+    public int getID() {
+        return ID;
+    }
+
+    protected void setID(int id) {
+        ID = id;
+    }
 
     public SColor getColor() {
         return color;
@@ -126,4 +135,34 @@ public abstract class Actor {
             throw new IllegalArgumentException("Hand cannot be null");
         this.hand = hand;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Actor actor = (Actor) o;
+
+        if (ID != actor.ID) return false;
+        if (health != actor.health) return false;
+        if (level != actor.level) return false;
+        if (!color.equals(actor.color)) return false;
+        if (!decks.equals(actor.decks)) return false;
+        if (!hand.equals(actor.hand)) return false;
+        return inventory.equals(actor.inventory);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ID;
+        result = 31 * result + health;
+        result = 31 * result + level;
+        result = 31 * result + inventory.hashCode();
+        result = 31 * result + decks.hashCode();
+        result = 31 * result + hand.hashCode();
+        result = 31 * result + color.hashCode();
+        return result;
+    }
+
 }
