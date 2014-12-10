@@ -9,13 +9,23 @@ import java.util.List;
  * Created by ian on 11/30/14.
  * Actor class is abstract super class of all acting entities in the game e.g. player and enemy
  */
-public abstract class Actor {
+public abstract class Actor implements Levelable{
     private int ID;
-    private int health, level;
+    private int health, level, experience, expCap;
     private Inventory inventory;
     private List<Deck> decks;
     private Hand hand;
     private SColor color;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public int getID() {
         return ID;
@@ -54,21 +64,65 @@ public abstract class Actor {
             this.health = 0;
     }
 
+    @Override
+    public int getExpCap() {
+        return expCap;
+    }
+
+    @Override
+    public void setExpCap(int expCap) {
+        if (expCap < 1)
+            throw new IllegalArgumentException("Can't have exp cap less than 1");
+        this.expCap = expCap;
+    }
+
+    @Override
+    public void modifyExpCap(int expCap) {
+        setExpCap(experience + expCap);
+        if (experience > this.expCap)
+            levelUp(experience % this.expCap);
+    }
+
+    @Override
+    public int getExperience() {
+        return experience;
+    }
+
+    @Override
+    public void setExperience(int experience) {
+        this.experience = experience;
+        if (this.experience > expCap)
+            levelUp(this.experience % expCap);
+    }
+
+    @Override
+    public void modifyExperience(int experience) {
+        this.experience += experience;
+        if (this.experience < 0)
+            setExperience(0);
+        if (this.experience > expCap)
+            levelUp(this.experience % expCap);
+    }
+
+    @Override
     public int getLevel() {
         return level;
     }
 
+    @Override
     public void setLevel(int level) {
         if (level < 1)
-            throw new IllegalArgumentException("Level cannot be less than 1");
+            level = 1;
         this.level = level;
     }
 
-    public void addLevel(int level) {
-        if (level < 0)
-            throw new IllegalArgumentException("Cannot add negative level");
-        this.level += level;
+    @Override
+    public void modifyLevel(int level) {
+        setLevel(this.level + level);
     }
+
+    @Override
+    public abstract void levelUp(int levels);
 
     public Inventory getInventory() {
         return inventory;
@@ -144,25 +198,12 @@ public abstract class Actor {
         Actor actor = (Actor) o;
 
         if (ID != actor.ID) return false;
-        if (health != actor.health) return false;
-        if (level != actor.level) return false;
-        if (!color.equals(actor.color)) return false;
-        if (!decks.equals(actor.decks)) return false;
-        if (!hand.equals(actor.hand)) return false;
-        return inventory.equals(actor.inventory);
 
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = ID;
-        result = 31 * result + health;
-        result = 31 * result + level;
-        result = 31 * result + inventory.hashCode();
-        result = 31 * result + decks.hashCode();
-        result = 31 * result + hand.hashCode();
-        result = 31 * result + color.hashCode();
-        return result;
+        return ID;
     }
-
 }
